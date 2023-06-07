@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from './components/Sidebar';
 
+
 const Page: React.FC = () => {
   return (
     <div className="flex h-screen">

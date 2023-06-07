@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+/* styles/global.css */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;400&display=swap');
+
