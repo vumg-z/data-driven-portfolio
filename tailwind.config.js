@@ -13,11 +13,7 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       fontFamily: {
-        'plex-mono': ['IBM Plex Mono', 'monospace'],
-      },
-      fontWeight: {
-        'extralight': 200,
-        'regular': 400,
+        'plex-mono': ['var(--font-ibm-plex-mono)', 'monospace'],
       }
     },
   },

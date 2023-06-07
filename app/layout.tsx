@@ -1,5 +1,20 @@
 import React from 'react';
 import './globals.css';
+import localFont from '@next/font/local'
+
+const ibmPlexMono = localFont({
+  src: [
+    {
+      path: '../public/IBM_Plex_Mono/IBMPlexMono-Regular.ttf',
+      weight: '400'
+    },
+    {
+      path: '../public/IBM_Plex_Mono/IBMPlexMono-ExtraLight.ttf',
+      weight: '200'
+    }
+  ],
+  variable: '--font-ibm-plex-mono'
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,8 +27,8 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body className="font-mono">
+    <html lang="en" className={`${ibmPlexMono.variable} font-mono`}>
+      <body>
         {children}
       </body>
     </html>
