@@ -1,5 +1,6 @@
 import React from 'react';
 import BigCard from "./BigCard"
+import Graph1 from "./Graph1" 
 
 const BigCardList: React.FC = () => {
     return (
@@ -8,6 +9,7 @@ const BigCardList: React.FC = () => {
             <BigCard
                 title="Data Visualization"
                 body="In today's era of AI and advanced technologies, leveraging data visualization becomes crucial in delivering exceptional value to clients. Harnessing the power of data through visualization enables us to unlock actionable insights and drive impactful outcomes. Let me help you stand out by showcasing your expertise in data visualization and its transformative impact on client success.">
+                <Graph1/>    
             </BigCard>
 
             <BigCard
