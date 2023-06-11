@@ -1,42 +1,99 @@
 'use client'
 
-import * as React from "react";
-import { select } from "d3";
+import React, { useRef, useEffect, useState } from 'react';
+import * as d3 from 'd3';
 
-function drawChart(graphRef: React.RefObject<HTMLDivElement>) {
-  const data = [12, 5, 6, 6, 9, 10];
-  const h = 120;
-  const w = 250;
-  const graphContainer = select(graphRef.current);
+const ForceDirectedGraph = () => {
+  const graphRef = useRef();
+  const [simulation, setSimulation] = useState<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null);
+  const [followersMap, setFollowersMap] = useState<Record<string, string[]>>({});
+  const [data, setData] = useState<{ id: string, followers: string[] }[]>([]);
 
-  graphContainer
-    .append("svg")
-    .attr("width", w)
-    .attr("height", h)
-    .style("margin-top", 50)
-    .style("margin-left", 50)
-    .selectAll("rect")
-    .data(data)
-    .enter()
-    .append("rect")
-    .attr("x", (d, i) => i * 40)
-    .attr("y", (d, i) => h - 10 * d)
-    .attr("width", 20)
-    .attr("height", (d, i) => d * 10)
-    .attr("fill", "steelblue");
-}
-
-const Counter = () => {
-  const graphRef = React.useRef<HTMLDivElement>(null);
-  React.useEffect(() => {
-    drawChart(graphRef);
+  useEffect(() => {
+    // Load data from the personas.json file
+    fetch("./personas.json")
+      .then(response => response.json())
+      .then(jsonData => setData(jsonData));
   }, []);
 
-  return (
-    <div>
-      <div ref={graphRef}></div>
-    </div>
-  );
-};
+  useEffect(() => {
+    // check if data is loaded
+    if (!data) {
+      return;
+    }
 
-export default Counter;
+    if (!graphRef.current) {
+      return; // Return early if graphRef.current is null or undefined.
+    }
+
+    const svg = d3.select(graphRef.current);
+    const width = 300;
+    const height = 400;
+
+    if (!simulation) {
+      const sim = d3.forceSimulation()
+        .force("link", d3.forceLink().id(d => d.id).distance(100))
+        .force("charge", d3.forceManyBody().strength(-200))
+        .force("center", d3.forceCenter(width / 2, height / 2));
+
+      setSimulation(sim);
+    } else {
+      // clear previous graph
+      svg.selectAll("circle").remove();
+      svg.selectAll("line").remove();
+      svg.selectAll("text").remove();
+
+      // draw new graph
+      const links = data.flatMap(d => d.followers.map(f => ({ source: d.id, target: f })));
+      const nodes = data.map(d => ({ id: d.id, x: Math.random() * width, y: Math.random() * height }));
+
+
+      const map: Record<string, string[]> = {};
+      data.forEach(d => {
+        map[d.id] = d.followers;
+      });
+      setFollowersMap(map);
+
+
+      simulation.nodes(nodes);
+      simulation.force("link").links(links);
+
+      svg
+        .style("margin-bottom", 200)
+        .style("margin-top", 100)
+
+      svg.selectAll("line")
+        .data(links)
+        .enter()
+        .append("line")
+        .attr("stroke", "white");
+
+      svg.selectAll("circle")
+        .data(nodes)
+        .enter()
+        .append("circle")
+        .attr("r", 10)
+        .style("fill", "white");
+
+      simulation.on("tick", () => {
+        svg.selectAll("line")
+          .attr("x1", d => d.source.x)
+          .attr("y1", d => d.source.y)
+          .attr("x2", d => d.target.x)
+          .attr("y2", d => d.target.y);
+
+        svg.selectAll("circle")
+          .attr("cx", d => d.x)
+          .attr("cy", d => d.y);
+      });
+
+      simulation.alpha(1).restart();
+    }
+  }, [data, simulation]);
+
+  return (
+    <svg ref={graphRef} style={{ width: "100%", height: "100%" }}></svg>
+  );
+}
+
+export default ForceDirectedGraph;

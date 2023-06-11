@@ -13,8 +13,9 @@ function drawChart(graphRef: React.RefObject<HTMLDivElement>) {
     .append("svg")
     .attr("width", w)
     .attr("height", h)
-    .style("margin-top", 50)
+    .style("margin-top", 100)
     .style("margin-left", 50)
+    .style("margin-bottom", 100)
     .selectAll("rect")
     .data(data)
     .enter()
@@ -23,7 +24,7 @@ function drawChart(graphRef: React.RefObject<HTMLDivElement>) {
     .attr("y", (d, i) => h - 10 * d)
     .attr("width", 20)
     .attr("height", (d, i) => d * 10)
-    .attr("fill", "steelblue");
+    .attr("fill", "white");
 }
 
 const Counter = () => {
