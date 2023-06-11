@@ -4,10 +4,14 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
 
 const ForceDirectedGraph = () => {
-  const graphRef = useRef();
-  const [simulation, setSimulation] = useState<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null);
+  const graphRef = useRef<SVGSVGElement | null>(null);
+  const [simulation, setSimulation] = useState<d3.Simulation<MyNode, undefined> | null>(null);
   const [followersMap, setFollowersMap] = useState<Record<string, string[]>>({});
   const [data, setData] = useState<{ id: string, followers: string[] }[]>([]);
+
+  interface MyNode extends d3.SimulationNodeDatum {
+    id: string;
+  }
 
   useEffect(() => {
     // Load data from the personas.json file
@@ -31,11 +35,10 @@ const ForceDirectedGraph = () => {
     const height = 400;
 
     if (!simulation) {
-      const sim = d3.forceSimulation()
-        .force("link", d3.forceLink().id(d => d.id).distance(100))
+      const sim = d3.forceSimulation<MyNode>()
+        .force("link", d3.forceLink<MyNode, d3.SimulationLinkDatum<MyNode>>().id(d => d.id).distance(100))
         .force("charge", d3.forceManyBody().strength(-200))
         .force("center", d3.forceCenter(width / 2, height / 2));
-
       setSimulation(sim);
     } else {
       // clear previous graph
@@ -48,6 +51,7 @@ const ForceDirectedGraph = () => {
       const nodes = data.map(d => ({ id: d.id, x: Math.random() * width, y: Math.random() * height }));
 
 
+
       const map: Record<string, string[]> = {};
       data.forEach(d => {
         map[d.id] = d.followers;
@@ -56,6 +60,7 @@ const ForceDirectedGraph = () => {
 
 
       simulation.nodes(nodes);
+      // @ts-ignore
       simulation.force("link").links(links);
 
       svg
@@ -77,15 +82,17 @@ const ForceDirectedGraph = () => {
 
       simulation.on("tick", () => {
         svg.selectAll("line")
-          .attr("x1", d => d.source.x)
-          .attr("y1", d => d.source.y)
-          .attr("x2", d => d.target.x)
-          .attr("y2", d => d.target.y);
+          .attr("x1", (d: any) => d.source.x)
+          .attr("y1", (d: any) => d.source.y)
+          .attr("x2", (d: any) => d.target.x)
+          .attr("y2", (d: any) => d.target.y);
 
         svg.selectAll("circle")
-          .attr("cx", d => d.x)
-          .attr("cy", d => d.y);
+          .attr("cx", (d: any) => d.x)
+          .attr("cy", (d: any) => d.y);
       });
+
+
 
       simulation.alpha(1).restart();
     }
