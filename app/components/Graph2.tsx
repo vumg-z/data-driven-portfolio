@@ -36,10 +36,12 @@ const ForceDirectedGraph = () => {
 
     if (!simulation) {
       const sim = d3.forceSimulation<MyNode>()
+        .alphaDecay(0.001) // Decrease this number to make the simulation slower
         .force("link", d3.forceLink<MyNode, d3.SimulationLinkDatum<MyNode>>().id(d => d.id).distance(100))
         .force("charge", d3.forceManyBody().strength(-200))
         .force("center", d3.forceCenter(width / 2, height / 2));
       setSimulation(sim);
+
     } else {
       // clear previous graph
       svg.selectAll("circle").remove();
