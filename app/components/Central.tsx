@@ -2,6 +2,7 @@ import React from 'react';
 import BigCard from "./BigCard"
 import Graph1 from "./Graph1" 
 import Graph2 from "./Graph2"
+import Graph3 from "./Graph3"
 
 const BigCardList: React.FC = () => {
     return (
@@ -15,7 +16,8 @@ const BigCardList: React.FC = () => {
 
             <BigCard
                 title="Geocentric Data"
-                body="In today's digital landscape, the effective visualization of geocentric data holds immense potential for delivering significant value to clients. By leveraging interactive maps and spatial analysis, we can unlock valuable insights, drive informed decision-making, and provide impactful solutions. Let me help you showcase your expertise in geocentric data visualization, demonstrating how it can create a competitive advantage for your clients and position you as a valuable asset in the industry.">
+               body="In today's digital landscape, the effective visualization of geocentric data holds immense potential for delivering significant value to clients. By leveraging interactive maps and spatial analysis, we can unlock valuable insights, drive informed decision-making, and provide impactful solutions. Let me help you showcase your expertise in geocentric data visualization, demonstrating how it can create a competitive advantage for your clients and position you as a valuable asset in the industry.">
+                <Graph3/>
             </BigCard>
 {/* 
             <BigCard
