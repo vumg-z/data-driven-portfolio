@@ -73,14 +73,14 @@ const ForceDirectedGraph = () => {
         .data(links)
         .enter()
         .append("line")
-        .attr("stroke", "white");
+        .attr("stroke", "#ccc");
 
       svg.selectAll("circle")
         .data(nodes)
         .enter()
         .append("circle")
         .attr("r", 10)
-        .style("fill", "white");
+        .style("fill", "#ccc");
 
       simulation.on("tick", () => {
         svg.selectAll("line")
