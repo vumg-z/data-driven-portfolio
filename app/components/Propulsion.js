@@ -14,7 +14,7 @@ export default class PropulsionSimulator {
     init() {
         // Configurar el mundo físico
         this.world = new CANNON.World();
-        this.world.gravity.set(0, -9.82, 0); // Gravedad en la dirección -y
+        this.world.gravity.set(0, 10, 0); // Gravedad en la dirección -y
 
         // Crear la referencia de la posición de generación de las cajas
         const boxGenerationPosition = new THREE.Vector3(0, -0.25, 0);
@@ -36,10 +36,15 @@ export default class PropulsionSimulator {
     createBoxAtPosition(x, y, z) {
         let box = new THREE.Mesh(
             new THREE.BoxGeometry(0.5, 0.5, 0.5),
-            new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+            new THREE.MeshBasicMaterial({ color: 0xffffff })
         );
         box.position.set(x + (Math.random() * 2 - 1), y, z + (Math.random() * 2 - 1)); // Posiciones aleatorias alrededor de la posición dada
         this.scene.add(box);
+
+        // Agrega un borde gris a cada cubo
+        const edges = new THREE.EdgesGeometry(box.geometry);
+        const edgeLines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x888888 })); // Gris
+        box.add(edgeLines);
 
         let boxBody = new CANNON.Body({
             mass: 1,
@@ -49,6 +54,7 @@ export default class PropulsionSimulator {
         this.world.addBody(boxBody);
         this.boxBodies.push({ threeObject: box, cannonBody: boxBody });
     }
+
 
     animate() {
         // Avanzar la simulación física
@@ -69,7 +75,7 @@ export default class PropulsionSimulator {
         // Eliminar cubos que están por debajo de una cierta posición relativa en Y
         const relativePositionThreshold = this.propulsionZone.position.y - 10;
         for (let i = this.boxBodies.length - 1; i >= 0; i--) {
-            if (this.boxBodies[i].threeObject.position.y < relativePositionThreshold) {
+            if (this.boxBodies[i].threeObject.position.y < relativePositionThreshold || this.boxBodies[i].threeObject.position.y > 50) {
                 this.scene.remove(this.boxBodies[i].threeObject);
                 this.world.remove(this.boxBodies[i].cannonBody);
                 this.boxBodies.splice(i, 1);
@@ -79,6 +85,7 @@ export default class PropulsionSimulator {
         // Renderizar la escena
         this.renderer.render(this.scene, this.camera);
     }
+
 
     start() {
         this.init();

@@ -5,7 +5,7 @@ import * as d3 from "d3";
 import Versor from "./Versor";
 import Land from "../../public/land.json";
 
-const width = 200, height = 200;
+const width = 300, height = 300;
 const sphere = { type: "Sphere" };
 const land = Land;
 
@@ -20,7 +20,10 @@ function Map() {
                 // @ts-ignore
                 const context = canvas.getContext("2d");
                 // @ts-ignore
-                const projection = d3.geoOrthographic().fitExtent([[10, 10], [width - 10, height - 10]], sphere);
+                // @ts-ignore
+                const projection = d3.geoOrthographic().fitExtent([[(width / 2 - (width - 50) / 2 ) + 20, height / 2 - (height - 50) / 2], [width - 25, height - 25]], sphere);
+
+
                 const path = d3.geoPath(projection, context);
 
                 async function renderMap() {
@@ -72,7 +75,7 @@ function Map() {
     }, []);
 
     return (
-        <div style={{ marginBottom: 20, marginTop: 100, marginLeft: 60}}>
+        <div style={{}}>
             <canvas ref={canvasRef} width={width} height={height} />
         </div>
     );

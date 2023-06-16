@@ -32,7 +32,7 @@ const ForceDirectedGraph = () => {
 
     const svg = d3.select(graphRef.current);
     const width = 300;
-    const height = 400;
+    const height = 300;
 
     if (!simulation) {
       const sim = d3.forceSimulation<MyNode>()
@@ -66,8 +66,8 @@ const ForceDirectedGraph = () => {
       simulation.force("link").links(links);
 
       svg
-        .style("margin-bottom", 200)
-        .style("margin-top", 100)
+        .style("width", 300)
+        .style("height", 300)
 
       svg.selectAll("line")
         .data(links)
@@ -94,14 +94,12 @@ const ForceDirectedGraph = () => {
           .attr("cy", (d: any) => d.y);
       });
 
-
-
       simulation.alpha(1).restart();
     }
   }, [data, simulation]);
 
   return (
-    <svg ref={graphRef} style={{ width: "100%", height: "50%" }}></svg>
+    <svg ref={graphRef} style={{ width: "100%", height: "100%" }}></svg>
   );
 }
 

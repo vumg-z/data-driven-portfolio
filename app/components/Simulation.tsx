@@ -10,25 +10,30 @@ const PropulsionSimulatorComponent = () => {
   useEffect(() => {
     // Create scene, camera, and renderer
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    renderer.setSize(300, 300);
 
     // Define the propulsion zone
     const propulsionZone = new THREE.Mesh(
       new THREE.BoxGeometry(2, 0.5, 2),
-      new THREE.MeshBasicMaterial({ color: 0xff0000 })
+      new THREE.MeshBasicMaterial({ color: 0x000000 })
     );
-    propulsionZone.position.set(0, 0, 0);
+
+    propulsionZone.position.set(0, 2.5, -2);
 
     // Add propulsion zone to the scene
     scene.add(propulsionZone);
 
     // Position the camera
-    camera.position.z = 5;
+    camera.position.z = -2;
+    camera.position.y = -6;
+    camera.lookAt(new THREE.Vector3(0, 1000, 0));
 
     // Initialize PropulsionSimulator
     const simulator = new PropulsionSimulator(scene, propulsionZone, renderer, camera);
+
 
 
     // Animation loop
