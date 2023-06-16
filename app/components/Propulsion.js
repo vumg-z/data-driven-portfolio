@@ -2,11 +2,13 @@ import * as THREE from 'three';
 import * as CANNON from 'cannon';
 
 export default class PropulsionSimulator {
-    constructor(scene, propulsionZone) {
+    constructor(scene, propulsionZone, renderer, camera) { // Add renderer and camera to the constructor
         this.scene = scene;
         this.world = new CANNON.World();
         this.propulsionZone = propulsionZone;
         this.boxBodies = [];
+        this.renderer = renderer; // Initialize renderer
+        this.camera = camera; // Initialize camera
     }
 
     init() {
@@ -48,7 +50,7 @@ export default class PropulsionSimulator {
         this.boxBodies.push({ threeObject: box, cannonBody: boxBody });
     }
 
-    animate(renderer, camera) {
+    animate() {
         // Avanzar la simulación física
         this.world.step(1 / 60);
 
@@ -75,7 +77,7 @@ export default class PropulsionSimulator {
         }
 
         // Renderizar la escena
-        renderer.render(this.scene, camera);
+        this.renderer.render(this.scene, this.camera);
     }
 
     start() {
