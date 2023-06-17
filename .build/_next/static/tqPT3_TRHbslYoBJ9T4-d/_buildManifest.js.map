@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../_next/static/tqPT3_TRHbslYoBJ9T4-d/_buildManifest.js"],
-  "sourcesContent": ["self.__BUILD_MANIFEST={__rewrites:{beforeFiles:[],afterFiles:[],fallback:[]},\"/_error\":[\"static/chunks/pages/_error-d79168f986538ac0.js\"],sortedPages:[\"/_app\",\"/_error\"]},self.__BUILD_MANIFEST_CB&&self.__BUILD_MANIFEST_CB();"],
-  "mappings": "AAAA,KAAK,mBAAiB,EAAC,YAAW,EAAC,aAAY,CAAC,GAAE,YAAW,CAAC,GAAE,UAAS,CAAC,EAAC,GAAE,WAAU,CAAC,gDAAgD,GAAE,aAAY,CAAC,SAAQ,SAAS,EAAC,GAAE,KAAK,uBAAqB,KAAK,oBAAoB;",
-  "names": []
-}
