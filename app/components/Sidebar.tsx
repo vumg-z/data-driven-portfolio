@@ -8,11 +8,24 @@ const Sidebar: React.FC = () => {
             <h2 className="text-3xl  font-regular">Victor Mendoza</h2>
             <p className=" font-extralight">+52 33-21-30-37-83</p>
             <p className='font-extralight'>victormendoza@verlo.co</p>
-            <Image src="/github-icon.svg" alt="githubicon" className="mx-auto" />
+            <Image
+                src="/github-icon.svg" // Route of the image file
+                height={32} // Desired size in pixels
+                width={32} // Desired size in pixels
+                alt="GitHub Icon"
+                style={{ display: "inline-block" }}
+            />
             <p className="font-extralight">Front-end developer specialized in interactive websites, data analysis, visualization, and team leadership.</p>
 
             <div className="flex items-center justify-center space-x-2">
-                <Image src="/elipse.svg" alt="elipse" className="mr-3" />
+                <Image
+                    src="/elipse.svg"
+                    alt="elipse"
+                    className="mr-3"
+                    height={16} // Desired size in pixels
+                    width={16} // Desired size in pixels
+
+                />
                 <h2 className="text-2xl font-regular">Experience</h2>
             </div>
 
@@ -34,7 +47,14 @@ const Sidebar: React.FC = () => {
             />
 
             <div className="flex items-center justify-center space-x-2">
-                <Image src="/elipse.svg" alt="elipse" className="mr-3" />
+                <Image
+                    src="/elipse.svg"
+                    alt="elipse"
+                    className="mr-3"
+                    height={16} // Desired size in pixels
+                    width={16} // Desired size in pixels
+
+                />
                 <h2 className="text-2xl font-regular">Education</h2>
             </div>
 
