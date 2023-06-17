@@ -21,7 +21,7 @@ function Map() {
                 const context = canvas.getContext("2d");
                 // @ts-ignore
                 // @ts-ignore
-                const projection = d3.geoOrthographic().fitExtent([[(width / 2 - (width - 50) / 2 ) + 20, height / 2 - (height - 50) / 2], [width - 25, height - 25]], sphere);
+                const projection = d3.geoOrthographic().fitExtent([[(width / 2 - (width - 50) / 2) , height / 2 - (height - 50) / 2], [width - 25, height - 25]], sphere);
 
 
                 const path = d3.geoPath(projection, context);
@@ -75,7 +75,7 @@ function Map() {
     }, []);
 
     return (
-        <div style={{}}>
+        <div style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
             <canvas ref={canvasRef} width={width} height={height} />
         </div>
     );

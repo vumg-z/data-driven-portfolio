@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from "./Card"
+import Image from 'next/image';
 
 const Sidebar: React.FC = () => {
     return (
@@ -7,11 +8,11 @@ const Sidebar: React.FC = () => {
             <h2 className="text-3xl  font-regular">Victor Mendoza</h2>
             <p className=" font-extralight">+52 33-21-30-37-83</p>
             <p className='font-extralight'>victormendoza@verlo.co</p>
-            <img src="/github-icon.svg" alt="githubicon" className="mx-auto" />
+            <Image src="/github-icon.svg" alt="githubicon" className="mx-auto" />
             <p className="font-extralight">Front-end developer specialized in interactive websites, data analysis, visualization, and team leadership.</p>
 
             <div className="flex items-center justify-center space-x-2">
-                <img src="/elipse.svg" alt="elipse" className="mr-3" />
+                <Image src="/elipse.svg" alt="elipse" className="mr-3" />
                 <h2 className="text-2xl font-regular">Experience</h2>
             </div>
 
@@ -20,7 +21,7 @@ const Sidebar: React.FC = () => {
                 title="CREARED"
                 footer="2022 - present"
                 subtitleStyle="font-extralight"
-                titleStyle="font-extralight"
+                titleStyle="font-bold"
                 footerStyle="font-extralight"
             />
             <Card
@@ -28,12 +29,12 @@ const Sidebar: React.FC = () => {
                 title="LYBWEB"
                 footer="2022 - 2023"
                 subtitleStyle="font-extralight"
-                titleStyle="font-extralight"
+                titleStyle="font-bold"
                 footerStyle="font-extralight"
             />
 
             <div className="flex items-center justify-center space-x-2">
-                <img src="/elipse.svg" alt="elipse" className="mr-3" />
+                <Image src="/elipse.svg" alt="elipse" className="mr-3" />
                 <h2 className="text-2xl font-regular">Education</h2>
             </div>
 
@@ -42,7 +43,7 @@ const Sidebar: React.FC = () => {
                 title="CETI COLOMOS"
                 footer="2019 - present"
                 subtitleStyle="font-extralight"
-                titleStyle="font-extralight"
+                titleStyle="font-bold"
                 footerStyle="font-extralight"
             />
 

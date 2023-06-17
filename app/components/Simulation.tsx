@@ -62,8 +62,17 @@ const PropulsionSimulatorComponent = () => {
   }, []);
 
   return (
+    <div
     // @ts-ignore
-    <div ref={containerRef} />
+      ref={containerRef}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100%"
+      }}
+    />
   );
 };
 

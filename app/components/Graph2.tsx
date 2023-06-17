@@ -99,7 +99,9 @@ const ForceDirectedGraph = () => {
   }, [data, simulation]);
 
   return (
-    <svg ref={graphRef} style={{ width: "100%", height: "100%" }}></svg>
+    <div style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+    <svg ref={graphRef} style={{ width: "300px", height: "300px" }}></svg>
+  </div>
   );
 }
 

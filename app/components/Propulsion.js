@@ -36,14 +36,14 @@ export default class PropulsionSimulator {
     createBoxAtPosition(x, y, z) {
         let box = new THREE.Mesh(
             new THREE.BoxGeometry(0.5, 0.5, 0.5),
-            new THREE.MeshBasicMaterial({ color: 0xffffff })
+            new THREE.MeshBasicMaterial({ color: 'white' })
         );
         box.position.set(x + (Math.random() * 2 - 1), y, z + (Math.random() * 2 - 1)); // Posiciones aleatorias alrededor de la posición dada
         this.scene.add(box);
 
         // Agrega un borde gris a cada cubo
         const edges = new THREE.EdgesGeometry(box.geometry);
-        const edgeLines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x888888 })); // Gris
+        const edgeLines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000 })); // Gris
         box.add(edgeLines);
 
         let boxBody = new CANNON.Body({
